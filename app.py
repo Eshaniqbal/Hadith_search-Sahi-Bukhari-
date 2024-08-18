@@ -8,8 +8,7 @@ def load_data():
 
 data = load_data()
 
-
-st.title('Hadith Search Application (Sahih Bukhari)')
+# Custom HTML for favicon and CSS styling
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -43,17 +42,39 @@ st.markdown("""
     .button:hover {
         background-color: #315f8b;
     }
+    .footer {
+        font-size: 0.9em;
+        color: #999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px 0;
+      
+        border-top: 1px solid #ddd;
+    }
+    .footer a {
+        color: #4682b4;
+        text-decoration: none;
+    }
+    .footer a:hover {
+        text-decoration: underline;
+    }
     </style>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     """, unsafe_allow_html=True)
 
+# Streamlit app layout
+st.title('Hadith Search Application(Sahih Bukhari)')
 
-st.subheader('Search for Hadith No:')
+# Input for Hadith ID
+st.subheader('Search for Hadith:')
 hadith_id = st.text_input('Enter Hadith No:', '')
 
-
+# Add a search button
 if st.button('Search'):
     if hadith_id:
-       
+        # Filter data based on Hadith ID
         result = data[data['hadith_id'].astype(str) == hadith_id]
         
         if not result.empty:
@@ -73,3 +94,11 @@ if st.button('Search'):
             st.write("No results found for this Hadith ID.")
     else:
         st.write("Please enter a Hadith ID to search.")
+
+# Footer
+st.markdown("""
+    <div class="footer">
+        <p>&copy; 2024 Hadith Search Application. All rights reserved.</p>
+        <p>Developed by <a href="https://github.com/Eshaniqbal" target="_blank">Eshan Iqbal</a></p>
+    </div>
+    """, unsafe_allow_html=True)
